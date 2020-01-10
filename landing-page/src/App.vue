@@ -1,19 +1,30 @@
 <template>
   <v-app light>
+    <!-- ///header start/// -->
     <v-toolbar class="white">
+      <!-- navigation icon -->
       <v-app-bar-nav-icon>
        <img :src="imageLink.logo" alt="Vuetify.js" height="50">
       </v-app-bar-nav-icon>
+      <!-- titile, synced text by v-text -->
       <v-toolbar-title class="mx-0" v-text="title"></v-toolbar-title>
       <p>Beta</p>
+      <!-- make space -->
       <v-spacer></v-spacer>
+      <!-- menu item -->
       <v-toolbar-items>
         <v-btn text>Open jobs</v-btn>
+        <v-btn text>Blog</v-btn>
+        <v-btn text>IR</v-btn>
         <v-btn text class="pink lighten-3">Sign In</v-btn>
       </v-toolbar-items>
     </v-toolbar>
+    <!-- ///header end/// -->
+
+
     <v-content>
-      <section>
+
+      <!-- <section>
         <v-parallax :src="imageLink.sub_main" height="600">
           <v-layout column align-center justify-center class="white--text">
             <h1 class="white--text mb-2 display-1 text-xs-center" style="font-weight: 900; text-shadow: 3px 2px #000000">The social network for epic content</h1>
@@ -23,8 +34,39 @@
             </v-btn>
           </v-layout>
         </v-parallax>
-      </section>
+      </section> -->
 
+      <!-- ///hero image slider start/// -->
+      <section>
+        <v-carousel
+          cycle
+          height="400"
+          hide-delimiter-background
+          show-arrows-on-hover
+        >
+          <v-carousel-item
+            v-for="(slide, i) in slides"
+            :key="i"
+          >
+            <v-sheet
+              height="100%"
+            >
+              <v-parallax :src="imageLink.sub_main" height="600">
+                <v-row
+                  class="fill-height"
+                  align="center"
+                  justify="center"
+                >
+                  <div class="display-3">{{ slide }} Slide</div>
+                </v-row>
+              </v-parallax>
+            </v-sheet>
+          </v-carousel-item>
+        </v-carousel>
+      </section>
+      <!-- ///hero image slider end/// -->
+
+      <!-- content -->
       <section>
         <v-layout
           column
@@ -32,6 +74,8 @@
           class="my-5"
           align-center
         >
+          <!-- xs is pc, sm is moblie -->
+          <!-- vuetify grid system have maximum 12 point -->
           <v-flex xs12 sm4 class="my-3">
             <div class="text-xs-center">
               <h2 class="headline">The best way to share your amazing stuff</h2>
@@ -103,7 +147,6 @@
        <section>
         <v-container grid-list-md>
 
-        
           <v-layout row wrap>
           <v-flex xs12 text-xs-center class="mt-5">
            <div class="headline">Are you amazed? Stay tuned!</div>
@@ -235,7 +278,14 @@ export default {
           /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
           "E-mail must be valid"
       ],
-      subscribed: false
+      subscribed: false,
+      slides: [
+        'First',
+        'Second',
+        'Third',
+        'Fourth',
+        'Fifth',
+      ],
     };
   },
   methods: {
